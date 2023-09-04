@@ -2,10 +2,14 @@ from keras.models import load_model
 from collections import deque
 import cv2
 import numpy as np
-import tensorflow as tf
 
+try:
+    XcepLSTM_model = load_model('my_LSTM_model_weights.h5')
+except Exception as e:
+    print("Error in loading model: ", e)
+    exit()
 
-XcepLSTM_model = load_model('./models/my_LSTM_model_weights.h5')
+XcepLSTM_model = load_model('my_LSTM_model_weights.h5')
 CLASSES_LIST = ['NonViolence', 'Violence']
 IMAGE_HEIGHT, IMAGE_WIDTH = 224, 224
 SEQUENCE_LENGTH = 30
@@ -45,4 +49,3 @@ def predict_frames(video_file_path, output_file_path, SEQUENCE_LENGTH):
         
     video_reader.release()
     video_writer.release()
-
