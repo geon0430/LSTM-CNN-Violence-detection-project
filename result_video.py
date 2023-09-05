@@ -14,12 +14,12 @@ IMAGE_HEIGHT = 224  # Replace with your actual image height
 IMAGE_WIDTH = 224  # Replace with your actual image width
 SEQUENCE_LENGTH = 15 
 
-def predict_frames(output_file_path, SEQUENCE_LENGTH):
+def predict_frames(video_file_path, output_file_path, SEQUENCE_LENGTH):
     
     # Read from the video file.
 
     XcepLSTM_model = load_model('./models/my_LSTM_model.h5')
-    video_reader = cv2.VideoCapture(0)
+    video_reader = cv2.VideoCapture(video_file_path)
  
     # Get the width and height of the video.
     original_video_width = int(video_reader.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -111,15 +111,15 @@ def show_pred_frames(pred_video_path):
     video_reader.release()
 
 # Construct the output video path.
-# test_videos_directory = 'test_videos'
-# os.makedirs(test_videos_directory, exist_ok = True)
+test_videos_directory = 'test_videos'
+os.makedirs(test_videos_directory, exist_ok = True)
  
-# output_video_file_path = f'{test_videos_directory}/Output-Test-Video.mp4'
-# # Specifying video to be predicted
-# input_video_file_path = "./datasets/1.mp4"
+output_video_file_path = f'{test_videos_directory}/Output-Test-Video.mp4'
+# Specifying video to be predicted
+input_video_file_path = "./datasets/1.mp4"
 
-# # Perform Prediction on the Test Video.
-# predict_frames(input_video_file_path, output_video_file_path, SEQUENCE_LENGTH)
+# Perform Prediction on the Test Video.
+predict_frames(input_video_file_path, output_video_file_path, SEQUENCE_LENGTH)
 
-# # Show random frames from the output video
-# show_pred_frames(output_video_file_path)
+# Show random frames from the output video
+show_pred_frames(output_video_file_path)
